@@ -203,7 +203,7 @@ app.post("/api/save-convocation", upload.fields([
      VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
     [reg_no, event, eventDate, eventTime, venue, attend,
      parentName, relationship, lf, ip,
-     today.toISOString().slice(0,10), today.toLocaleTimeString("en-IN")],
+     today.toISOString().slice(0,10), today.toTimeString().slice(0,8)],
     (err) => {
       if (err) { console.log(err); return res.json({ success: false }); }
       res.json({ success: true, reg_no });
