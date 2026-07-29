@@ -61,24 +61,38 @@
 
 /* ================= EVENT OPEN ================= */
 
-function openEvent(){
+async function openEvent(){
 
 var event = document.getElementById("event").value;
 var reg_no = document.getElementById("reg_no").value;
 
-if(event=="convocation"){
-window.location="convocation.html?reg_no="+reg_no;
-}
+if(event === ""){ return; }
 
-if(event=="sports"){
-window.location="sports.html?reg_no="+reg_no;
-}
+/* Save student registration first */
+const formData = new FormData(document.getElementById("registerForm"));
 
-if(event=="annual"){
-window.location="annual.html?reg_no="+reg_no;
-}
-
-}
+try{
+    let res = await fetch("/api/register", {
+        method: "POST",
+        body: formData
+    });
+    let result = await res.json();
+    console.log("Register result:", result);
+}catch(err){
+    console.log(err);}
+    if(event=="convocation"){
+        window.location.href="convocation.html?reg_no="+reg_no;
+    }
+    if
+(event=="sports"){
+        window.location.href="sports.html?reg_no="+reg_no;
+    }
+    if(event=="annualday"){
+        window.location.href="annualday.html?reg_no="+reg_no;
+    
+    }
+    }
+    
 
 /* ================= SECOND SUBMIT CODE (FIXED) ================= */
 
