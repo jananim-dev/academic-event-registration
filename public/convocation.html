@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Convocation Registration</title>
+<meta charset="UTF-8">
+<style>
+
+/* BODY BACKGROUND */
+body{
+margin:0;
+font-family:Arial;
+
+/* convocation background image */
+background:url("images/convocation-bg.jpg");
+background-size:cover;
+background-position:center;
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* MAIN CARD */
+.convocation-card{
+
+width:750px;
+padding:30px;
+
+display:flex;
+gap:30px;
+
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+
+border-radius:20px;
+color:white;
+
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
+animation:float 4s ease-in-out infinite;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float{
+
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+
+}
+
+/* LEFT SIDE EVENT */
+.event-section{
+width:45%;
+}
+
+.event-title{
+font-size:26px;
+margin-bottom:20px;
+}
+
+.event-box{
+
+background:rgba(255,255,255,0.2);
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+
+}
+
+/* RIGHT SIDE FORM */
+.form-section{
+width:55%;
+}
+
+/* AUTHORIZATION BOX */
+.authorization-box{
+
+max-height:200px;
+overflow-y:auto;
+
+background:rgba(255,255,255,0.2);
+padding:15px;
+border-radius:10px;
+
+}
+
+/* RADIO */
+.radio-option{
+margin-bottom:10px;
+}
+
+/* INPUT */
+.authorization-box input[type="text"],
+.authorization-box input[type="file"]{
+
+width:100%;
+padding:8px;
+margin:8px 0;
+
+border:none;
+border-radius:6px;
+
+}
+
+/* BUTTON */
+.submit-btn{
+
+width:100%;
+padding:12px;
+margin-top:20px;
+
+border:none;
+border-radius:8px;
+
+background:#2563eb;
+color:white;
+
+font-size:16px;
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+.submit-btn:hover{
+
+background:#1e40af;
+transform:scale(1.05);
+
+}
+
+/* SUCCESS POPUP */
+
+.popup{
+
+position:fixed;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+background:white;
+color:black;
+
+padding:30px;
+
+border-radius:10px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+display:none;
+
+}
+
+/* SCROLL BAR */
+.authorization-box::-webkit-scrollbar{
+width:6px;
+}
+
+.authorization-box::-webkit-scrollbar-thumb{
+background:white;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="convocation-card">
+
+<!-- LEFT SIDE -->
+<div class="event-section">
+
+<h2 class="event-title">🎓 Convocation</h2>
+
+<div class="event-box">
+
+<p><b>Event:</b> Annual Convocation</p>
+
+<p><b>Date:</b> 20 June 2026</p>
+
+<p><b>Time:</b> 10:00 AM</p>
+
+<p><b>Venue:</b> Main Auditorium</p>
+
+</div>
+
+<div class="event-box">
+
+<p><b>Registration Date:</b>
+<span id="regDate"></span></p>
+
+<p><b>Registration Time:</b>
+<span id="regTime"></span></p>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT SIDE FORM -->
+<div class="form-section">
+
+<h3>Authorization</h3>
+
+<form id="convocationForm">
+
+<input type="hidden" name="reg_no" id="reg_no" value="42312462201">
+<input type="hidden" name="event" value="Annual Convocation">
+<input type="hidden" name="eventDate" value="2026-06-20">
+<input type="hidden" name="eventTime" value="10:00:00">
+<input type="hidden" name="venue" value="Main Auditorium">
+
+<div class="authorization-box">
+
+<div class="radio-option">
+
+<input type="radio" name="attend" value="self" onclick="selfAttend()">
+I Will Attend
+
+</div>
+
+<div class="radio-option">
+
+<input type="radio" name="attend" value="parent" onclick="parentAttend()">
+Parent Will Attend
+
+</div>
+
+<div id="parentFields" style="display:none">
+
+<input type="text" name="parentName" placeholder="Parent Name">
+
+<input type="text" name="relationship" placeholder="Relationship">
+
+<label>Upload Authorization Letter</label>
+<input type="file" name="letterFile">
+
+<label>Upload ID Proof</label>
+<input type="file" name="idProofFile">
+
+</div>
+
+</div>
+
+<button type="submit" class="submit-btn">
+Submit Registration
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- SUCCESS POPUP -->
+
+<div class="popup" id="popup">
+
+<h3>✅ Registration Successful</h3>
+<p>Your convocation registration has been submitted.</p>
+
+</div>
+
+
+<script>
+
+/* CURRENT DATE TIME */
+
+function updateDateTime(){
+
+const now = new Date();
+
+document.getElementById("regDate").innerText = now.toLocaleDateString();
+
+document.getElementById("regTime").innerText = now.toLocaleTimeString();
+
+}
+
+updateDateTime();
+
+
+/* SELF ATTEND */
+
+function selfAttend(){
+
+document.getElementById("parentFields").style.display="none";
+
+}
+
+
+/* PARENT ATTEND */
+
+function parentAttend(){
+
+document.getElementById("parentFields").style.display="block";
+
+}
+
+
+/* FORM SUBMIT */
+const params = new URLSearchParams(window.location.search);
+const reg_no = params.get("reg_no");
+
+if(reg_no){
+document.getElementById("reg_no").value = reg_no;
+}
+
+document.getElementById("convocationForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const formData = new FormData(this);
+
+fetch("/api/save-convocation",{
+method:"POST",
+body:formData
+})
+.then(res=>res.json())
+.then(data=>{
+
+if(data.success){
+
+document.getElementById("popup").style.display="block";
+
+setTimeout(()=>{
+
+window.location.href="/api/download-invitation/"+data.reg_no;
+
+},2000);
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>

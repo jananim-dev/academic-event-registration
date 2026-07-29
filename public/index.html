@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Registration 2026 | University Event Portal</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">
+    🎓 Event Registration 2026
+    <span>University Event Portal</span>
+  </div>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="register.html">Register</a>
+    <a href="staff-login.html">Staff Login</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="badge">Registration Open for Class of 2026</span>
+    <h1>Celebrate Your<br><span>Achievement</span></h1>
+    <p>Join us for the Event Ceremony. Register now to confirm your attendance and receive your official invitation.</p>
+    <div class="buttons">
+      <a href="register.html" class="btn primary">Register Now →</a>
+      <a href="#verify" class="btn secondary">Verify Student</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="images/graduation_cap_and_scroll_on_clean_background.png" alt="Graduation">
+  </div>
+</section>
+
+<!-- VERIFY SECTION -->
+<section class="verify-section" id="verify">
+  <div class="verify-wrapper">
+
+    <div class="verify-info">
+      <div class="verify-badge">Student Portal</div>
+      <h2 class="verify-title">Verify Your<br><span>Identity</span></h2>
+      <p class="verify-subtitle">Enter your register number and date of birth to access your convocation registration and download your official invitation.</p>
+      <ul class="verify-details">
+        <li>
+          <div class="detail-icon">📅</div>
+          <div class="detail-text">
+            <strong>Ceremony Date</strong>
+            <span>20 June 2026 · 10:00 AM</span>
+          </div>
+        </li>
+        <li>
+          <div class="detail-icon">📍</div>
+          <div class="detail-text">
+            <strong>Venue</strong>
+            <span>Sivaramakrishnan Memorial Auditorium, Cuddalore</span>
+          </div>
+        </li>
+        <li>
+          <div class="detail-icon">🎓</div>
+          <div class="detail-text">
+            <strong>Eligible Students</strong>
+            <span>B.Tech &amp; MCA — Batch 2022–2026</span>
+          </div>
+        </li>
+        <li>
+          <div class="detail-icon">📋</div>
+          <div class="detail-text">
+            <strong>What You'll Get</strong>
+            <span>Official invitation with PDF download</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="verify-card">
+      <p class="card-eyebrow">Step 1 of 2</p>
+      <h3 class="card-heading">Student Verification</h3>
+      <p class="card-desc">Please enter your credentials to proceed</p>
+      <div class="card-divider"></div>
+      <form id="verifyForm">
+        <div class="field-group">
+          <label class="field-label" for="reg_no">Register Number</label>
+          <input class="field-input" type="text" id="reg_no" placeholder="e.g. 42132462201" required autocomplete="off">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="dob">Date of Birth</label>
+          <input class="field-input" type="date" id="dob" required>
+        </div>
+        <button type="submit" class="verify-btn">Verify &amp; Continue →</button>
+        <p id="errorMsg"></p>
+      </form>
+      <p class="card-help">Having trouble? Email <span>info@kcet.in</span></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- INFO SECTION -->
+<section class="info-section">
+  <div class="info-card">
+    <div class="icon">📅</div>
+    <h3>Date &amp; Time</h3>
+    <p>20 June 2026<br>Ceremony starts at 10:00 AM<br>Gates close at 9:30 AM</p>
+  </div>
+  <div class="info-card">
+    <div class="icon">📍</div>
+    <h3>Venue</h3>
+    <p>Sivaramakrishnan Memorial Auditorium,<br>Cuddalore</p>
+  </div>
+  <div class="info-card">
+    <div class="icon">📋</div>
+    <h3>Instructions</h3>
+    <ul>
+      <li>Wear formal academic dress</li>
+      <li>Bring your student ID card</li>
+      <li>Guests limited to 2 per student</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h2>🎓 Event Registration 2026</h2>
+      <p>Celebrating academic excellence and the bright future of our graduates.</p>
+    </div>
+    <div>
+      <h3>Contact Support</h3>
+      <p>Email: info@kcet.in</p>
+      <p>Phone: (04142)-285601 to 285604</p>
+      <p>Office: Admin Block</p>
+    </div>
+    <div>
+      <h3>Event Details</h3>
+      <p>Date: 20 June 2026</p>
+      <p>Venue: Sivaramakrishnan Memorial Auditorium</p>
+      <p>Time: 10:00 AM onwards</p>
+    </div>
+  </div>
+  <hr>
+  <p class="copyright">© 2026 Krishnasamy College of Engineering &amp; Technology. All rights reserved.</p>
+</footer>
+
+<script src="js/verify.js"></script>
+<script>
+function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  nav.classList.toggle("open");
+}
+</script>
+</body>
+</html>
