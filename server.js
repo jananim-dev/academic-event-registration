@@ -12,8 +12,11 @@ app.use("/uploads", express.static("uploads"));
 app.use(session({ secret: "convocation-secret", resave: false, saveUninitialized: true }));
 
 const db = mysql.createConnection({
-  host: "localhost", user: "root",
-  password: "", database: "convocation2026", port: 3306
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "convocation2026",
+  port: process.env.DB_PORT || 3306
 });
 db.connect(err => {
   if (err) console.error("❌ MySQL connection failed:", err);
