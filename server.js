@@ -133,12 +133,14 @@ function isAdmin(req, res, next) {
 app.get("/api/students", isAdmin, (req, res) => {
   db.query(`
     SELECT
-      s.id, s.full_name, s.reg_no, s.email, s.phone,
-      s.department, s.degree, s.year, s.attending,
-      s.id_proof, s.status,
-      COALESCE(e.event_name, cr.event, 'N/A') AS event_name,
-      cr.parent_name, cr.relationship,
-      cr.registration_date, cr.registration_time
+      s.id, ANY_VALUE(s.full_name) AS full_name, ANY_VALUE(s.reg_no) AS reg_no,
+      ANY_VALUE(s.email) AS email, ANY_VALUE(s.phone) AS phone,
+      ANY_VALUE(s.department) AS department, ANY_VALUE(s.degree) AS degree,
+      ANY_VALUE(s.year) AS year, ANY_VALUE(s.attending) AS attending,
+      ANY_VALUE(s.id_proof) AS id_proof, ANY_VALUE(s.status) AS status,
+      ANY_VALUE(COALESCE(e.event_name, cr.event, 'N/A')) AS event_name,
+      ANY_VALUE(cr.parent_name) AS parent_name, ANY_VALUE(cr.relationship) AS relationship,
+      ANY_VALUE(cr.registration_date) AS registration_date, ANY_VALUE(cr.registration_time) AS registration_time
     FROM students s
     LEFT JOIN events e ON s.event_id = e.id
     LEFT JOIN convocation_registration cr
@@ -146,6 +148,7 @@ app.get("/api/students", isAdmin, (req, res) => {
       AND cr.id = (SELECT MAX(id) FROM convocation_registration WHERE reg_no = s.reg_no)
     GROUP BY s.id
     ORDER BY s.id DESC`,
+
     (err, rows) => {
       if (err) { console.log(err); return res.json([]); }
       res.json(rows);
